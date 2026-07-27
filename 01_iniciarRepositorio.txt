@@ -32,3 +32,27 @@ git branch testing --> creamos la rama de testing
 git branch produccion --> creamos la rama de produccion
 
 git branch --> vemos todas las ramas
+
+
+----------------------------------------------------------------------
+* EN LA RAMA PRINCIPAL DE DESARROLLO *
+
+git checkout desarrollo => nos paramos en la rama de desarrollo
+git add . => sumamos todos los cambios pendientes a la rama de desarrollo
+git commit -m "cambios del dia de la fecha"
+git push -u origin desarrollo => subimos todos los cambios de la rama de desarrollo a la nube
+
+------------------------------------------------------------------------
+* EN LA RAMA DE TESTING DESARROLLO => TESTING *
+
+git checkout testing => nos paramos en la rama de testing
+git merge desarrollo => le decimos a git que actualice testing con los commits nuevos que tiene Desarrollo que no tiene para que quede nivelado
+git push -u origin testing => le decimos que actualice en la nube la rama de testing
+
+
+------------------------------------------------------------------------
+* EN LA RAMA DE TESTING DESARROLLO => PRODUCCION *
+
+git checkout produccion => nos paramos en la rama de produccion
+git merge desarrollo => le decimos a git que actualice testing con los commits nuevos que tiene Desarrollo que no tiene para que quede nivelado
+git push -u origin testing => le decimos que actualice en la nube la rama de testing
