@@ -46,6 +46,7 @@ git push -u origin desarrollo => subimos todos los cambios de la rama de desarro
 * EN LA RAMA DE TESTING DESARROLLO => TESTING *
 
 git checkout testing => nos paramos en la rama de testing
+git pull => traemos cambios de otros usuarios de esa rama
 git merge desarrollo => le decimos a git que actualice testing con los commits nuevos que tiene Desarrollo que no tiene para que quede nivelado
 git push -u origin testing => le decimos que actualice en la nube la rama de testing
 
@@ -54,5 +55,43 @@ git push -u origin testing => le decimos que actualice en la nube la rama de tes
 * EN LA RAMA DE TESTING DESARROLLO => PRODUCCION *
 
 git checkout produccion => nos paramos en la rama de produccion
+git pull => traemos cambios de otros usuarios de esa rama
 git merge desarrollo => le decimos a git que actualice testing con los commits nuevos que tiene Desarrollo que no tiene para que quede nivelado
 git push -u origin testing => le decimos que actualice en la nube la rama de testing
+
+========================================================================
+CONFLICTOS DE MERGE - COMO SE RESUELVEN (3 alternativas)
+========================================================================
+
+Cuando aparece un conflicto, hay tres formas de resolverlo:
+
+A) MODIFICAR EL ARCHIVO MANUALMENTE (mezclar o elegir a mano)
+1. Abrir el archivo con un editor.
+2. Va a tener marcas asi:
+   <<<<<<< HEAD
+   Cambio de Persona B
+   =======
+   Cambio de Persona A
+   >>>>>>> origin/desarrollo
+3. Borrar las lineas <<<<<<<, =======, >>>>>>> y dejar el contenido final que se quiera (una version, la otra, o una mezcla de ambas).
+4. Guardar el archivo.
+5. Confirmar:
+   git add notas.txt
+   git commit -m "Resuelvo conflicto"
+   git push
+
+B) QUEDARSE CON LA VERSION PROPIA (la que tenias vos, local)
+git checkout --ours notas.txt
+git add notas.txt
+git commit -m "Resuelvo conflicto quedandome con mi version"
+git push
+
+C) QUEDARSE CON LA VERSION DEL OTRO (la que vino del merge/pull)
+git checkout --theirs notas.txt
+git add notas.txt
+git commit -m "Resuelvo conflicto quedandome con la version entrante"
+git push
+
+Nota: las opciones B y C descartan el archivo completo de un lado, no seleccionan linea por linea. Si se necesita mezclar partes especificas, hay que usar la opcion A.
+
+========================================================================
